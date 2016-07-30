@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-data-test-id'
+  name: 'ember-test-with-data'
 };
