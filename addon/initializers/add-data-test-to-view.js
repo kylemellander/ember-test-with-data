@@ -6,10 +6,15 @@ export default {
   name: 'add-data-test-to-view',
   initialize(app) {
     const ENV = app.resolveRegistration('config:environment');
-    const addonOptions = ENV['ember-test-with-data'] || {};
-    const hiddenENVs = addonOptions.hiddenEnvironments || ['production'];
+    const {
+      environment,
+      'ember-test-with-data': addonOptions = {}
+    } = ENV;
+    const {
+      hiddenEnvironments = ['production']
+    } = addonOptions;
 
-    if (hiddenENVs.includes(ENV.environment)) { return; }
+    if (hiddenEnvironments.indexOf(environment) !== -1) { return; }
 
     Component.reopen({
       attributeBindings: ['data-test-id', 'data-test-class']
