@@ -25,7 +25,7 @@
   "undef": true,
   "sub": true,
   "strict": false,
-  "white": false,
+  "white": true,
   "eqnull": true,
   "esversion": 6,
   "unused": true
