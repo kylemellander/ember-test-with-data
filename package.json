@@ -1,7 +1,7 @@
 {
-  "name": "ember-data-test-id",
+  "name": "ember-test-with-data",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "This Ember addon allows you to test using data attributes without sending it to live sites.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,11 +11,11 @@
     "start": "ember server",
     "test": "ember try:each"
   },
-  "repository": "",
+  "repository": "https://github.com/kylemellander/ember-test-with-data",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Kyle Mellander",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
