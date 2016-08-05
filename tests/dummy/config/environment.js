@@ -19,9 +19,9 @@ module.exports = function(environment) {
     }
   };
 
-  // ENV['ember-test-with-data'] = {
-  //   hiddenEnvironments: ['development']
-  // };
+  ENV['ember-test-with-data'] = {
+    hiddenEnvironments: ['development']
+  };
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
