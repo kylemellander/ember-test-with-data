@@ -18,7 +18,10 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    'ember-test-with-data': { hiddenEnvironments: ['development'] }
+    'ember-test-with-data': {
+      // hiddenEnvironments: ['development'],
+      autoTag: true
+    }
   };
 
   if (environment === 'development') {
