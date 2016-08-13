@@ -14,6 +14,7 @@ export default {
       'ember-test-with-data': addonOptions = {}
     } = ENV;
     const {
+      autoTag = true,
       hiddenEnvironments = ['production']
     } = addonOptions;
 
@@ -23,7 +24,7 @@ export default {
       attributeBindings: ['dataTestId:data-test-id']
     });
 
-    if (addonOptions.autoTag) {
+    if (autoTag) {
       Component.reopen({
         dataTestId: computed(function() {
           const suffix = this.get('dataTestSuffix');
