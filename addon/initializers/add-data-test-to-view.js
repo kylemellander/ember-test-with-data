@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
-const { Component } = Ember;
+const {
+  Component,
+  computed
+} = Ember;
 
 export default {
   name: 'add-data-test-to-view',
@@ -17,7 +20,20 @@ export default {
     if (hiddenEnvironments.indexOf(environment) !== -1) { return; }
 
     Component.reopen({
-      attributeBindings: ['data-test-id', 'data-test-class']
+      attributeBindings: ['dataTestId:data-test-id']
     });
+
+    if (addonOptions.autoTag) {
+      Component.reopen({
+        dataTestId: computed(function() {
+          const suffix = this.get('dataTestSuffix');
+          let baseId = (this._debugContainerKey || '')
+            .replace(/.*component:/g, '')
+            .replace(/\//g, '-')
+            .replace(/^-/, '');
+          return suffix ? `${baseId}-${suffix}` : baseId;
+        })
+      });
+    }
   }
 };
