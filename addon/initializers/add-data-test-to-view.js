@@ -2,7 +2,11 @@ import Ember from 'ember';
 
 const {
   Component,
-  computed
+  computed,
+  String: {
+    camelize,
+    dasherize
+  }
 } = Ember;
 
 export default {
@@ -15,26 +19,30 @@ export default {
     } = ENV;
     const {
       autoTag = true,
-      hiddenEnvironments = ['production']
+      hiddenEnvironments = ['production'],
+      dataTestSuffix = 'Id'
     } = addonOptions;
 
     if (hiddenEnvironments.indexOf(environment) !== -1) { return; }
 
-    Component.reopen({
-      attributeBindings: ['dataTestId:data-test-id']
-    });
+    const dasherizeAttr = `data-test-${dasherize(dataTestSuffix)}`;
+    const camelizeAttr = camelize(dasherizeAttr);
+
+    const componentAttrs = {
+      attributeBindings: [`${camelizeAttr}:${dasherizeAttr}`]
+    };
 
     if (autoTag) {
-      Component.reopen({
-        dataTestId: computed(function() {
-          const suffix = this.get('dataTestSuffix');
-          let baseId = (this._debugContainerKey || '')
-            .replace(/.*component:/g, '')
-            .replace(/\//g, '-')
-            .replace(/^-/, '');
-          return suffix ? `${baseId}-${suffix}` : baseId;
-        })
+      componentAttrs[camelizeAttr] = computed(function() {
+        const suffix = this.get('dataTestSuffix');
+        let baseId = (this._debugContainerKey || '')
+        .replace(/.*component:/g, '')
+        .replace(/\//g, '-')
+        .replace(/^-/, '');
+        return suffix ? `${baseId}-${suffix}` : baseId;
       });
     }
+
+    Component.reopen(componentAttrs);
   }
 };
