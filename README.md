@@ -1,26 +1,78 @@
-# Ember-data-test-id
+# ember-test-with-data
 
-This README outlines the details of collaborating on this Ember addon.
+## Introduction
+
+ember-test-with-data keeps integration and acceptance testing consistent by
+using tags set specifically in HTML5 data attributes.  
+
+## Why should I use data attributes?
+
+HTML markup and css classes are often sufficient for selecting DOM elements, but
+that is not the purpose of why they are inserted into your code. HTML provides
+the structure for your page and css gives your page styling. To use them for
+testing, we give them a secondary purpose, which can sometimes create unneed
+complexity.
+
+By creating data-test attributes on elements, we can specifically select DOM
+elements with that attribute being a sole purpose of helping you test.
+
+## Features
+
+* **Strip tags from production** - Removes all `data-test` attributes from your
+code so the attributes don't add bloat to your production/staging environments
+* **AutoTag Feature** - When enabled it adds data-test attributes to all
+components and built in Ember template helpers based on the component name.
+* **Suffixes** - Allows you to easily add a suffix to to a component's
+`data-test` attribute. This allows for easily setting and finding specific
+components when a component is reused.
+* **Rich Settings** - We want this addon to be very customizable so that it will
+fit with your project.
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+```
+ember install ember-test-with-data
+```
 
-## Running
+That's it! It should work out of the box, but there are some settings you can
+change.
 
-* `ember serve`
-* Visit your app at http://localhost:4200.
+## Configuration
 
-## Running Tests
+You can set your preferences for ember-test-with-data in the
+`/config/environment.js` file in your ember-cli app. Example:
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+```js
+// config/environment.js
+module.exports = function(environment) {
+  var ENV = {
+    /*
+    * Your settings in here
+    */
+  };
 
-## Building
+  ENV['ember-test-with-data'] = {
+    hiddenEnvironments: ['staging', 'production'], // default ['production']
+    dataTestSuffix: 'id',                          // default null
+    autoTag: true                                  // default true
+  }
+}
+```
 
-* `ember build`
+###### Settings
 
-For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
+* **hiddenEnvironments** (default: `['production']`) - Sets the environments in
+which data-test attributes will be stripped.
+* **dataTestSuffix** (default: `null`) - Sets the suffix of the data-test
+identifier. A value of null makes the generated test attributes as `data-test`,
+but setting it to `id` makes the generated test attributes `data-test-id`.
+* **autoTag** (default: true) - Automatically generates data test attributes on
+all components and ember template helpers based on their name. (i.e.
+`{{your-component}}` will give the components element a data test attribute of
+`your-component`)
+
+## Future features
+
+* **Test Helpers** - To help find elements in integration and acceptance tests.
+* **Template Helpers** - To help generate data-test attributes based on models
+and other contexts.
