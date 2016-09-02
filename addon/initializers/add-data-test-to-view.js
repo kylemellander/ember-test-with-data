@@ -20,12 +20,13 @@ export default {
     const {
       autoTag = true,
       hiddenEnvironments = ['production'],
-      dataTestSuffix = 'Id'
+      dataTestSuffix
     } = addonOptions;
 
     if (hiddenEnvironments.indexOf(environment) !== -1) { return; }
 
-    const dasherizeAttr = `data-test-${dasherize(dataTestSuffix)}`;
+    const dasherizeAttr = dataTestSuffix ?
+      `data-test-${dasherize(dataTestSuffix)}` : 'data-test';
     const camelizeAttr = camelize(dasherizeAttr);
 
     const componentAttrs = {
