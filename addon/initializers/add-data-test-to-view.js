@@ -33,6 +33,8 @@ export default {
       attributeBindings: [`${camelizeAttr}:${dasherizeAttr}`]
     };
 
+    componentAttrs[camelizeAttr] = computed.alias(dasherizeAttr);
+
     if (autoTag) {
       componentAttrs[camelizeAttr] = computed(function() {
         const suffix = this.get('dataTestSuffix');
