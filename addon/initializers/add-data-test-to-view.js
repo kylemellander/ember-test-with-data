@@ -37,9 +37,9 @@ export default {
       componentAttrs[camelizeAttr] = computed(function() {
         const suffix = this.get('dataTestSuffix');
         let baseId = (this._debugContainerKey || '')
-        .replace(/.*component:/g, '')
-        .replace(/\//g, '-')
-        .replace(/^-/, '');
+          .replace(/.*component:/g, '')
+          .replace(/\//g, '-')
+          .replace(/^-/, '');
         return suffix ? `${baseId}-${suffix}` : baseId;
       });
     }
