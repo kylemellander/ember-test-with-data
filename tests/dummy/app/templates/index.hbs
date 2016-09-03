@@ -13,3 +13,9 @@ with override: {{textarea dataTest='text-area-1'}}
 
 <h1 data-test='manual-tagging'>Manual tagging</h1>
 <p data-test-crazy-attribute='tagging'>Specialized data-test attribute</p>
+
+{{data-test}}
+{{#each model as |cereal index|}}
+  From index: {{data-test dataTestSuffix=index}}<br />
+  From value: {{data-test dataTestSuffix=cereal}}
+{{/each}}
