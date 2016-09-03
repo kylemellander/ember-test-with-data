@@ -36,13 +36,14 @@ export default {
     componentAttrs[camelizeAttr] = computed.alias(dasherizeAttr);
 
     if (autoTag) {
-      componentAttrs[camelizeAttr] = computed(function() {
+      componentAttrs[dasherizeAttr] = computed('dataTestSuffix', function() {
         const suffix = this.get('dataTestSuffix');
         let baseId = (this._debugContainerKey || '')
           .replace(/.*component:/g, '')
           .replace(/\//g, '-')
           .replace(/^-/, '');
-        return suffix ? `${baseId}-${suffix}` : baseId;
+
+        return typeof suffix === 'undefined' ? baseId : `${baseId}-${suffix}`;
       });
     }
 
