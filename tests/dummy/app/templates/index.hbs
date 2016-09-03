@@ -1,13 +1,15 @@
 <h1>Link-to Helper</h1>
 {{link-to 'with autoTag' 'index'}}
-{{link-to 'with override' 'index' dataTestId='hello'}}
+{{link-to 'with override' 'index' dataTest='hello'}}
+{{link-to 'with suffix' 'index' dataTestSuffix='suffix'}}
 
 <h1>Input Helper</h1>
-{{input dataTestId='this-is-an-overridden-input-id'}}
 {{input value='default with autoTag'}}
+{{input dataTest='this-is-an-overridden-input-id' value='overridden'}}
 
 <h1>Textarea Helper</h1>
 with autoTag: {{textarea}}
-with attribute: {{textarea dataTestId='text-area-1'}}
+with override: {{textarea dataTest='text-area-1'}}
 
-<h1 data-test-id='manual-tagging'>Manual tagging</h1>
+<h1 data-test='manual-tagging'>Manual tagging</h1>
+<p data-test-crazy-attribute='tagging'>Specialized data-test attribute</p>

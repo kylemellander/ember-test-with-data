@@ -20,7 +20,6 @@ module.exports = function(environment) {
 
     'ember-test-with-data': {
       // hiddenEnvironments: ['development'],
-      autoTag: true
     }
   };
 
