@@ -24,9 +24,12 @@ export default {
 
     if (hiddenEnvironments.indexOf(environment) !== -1) { return; }
 
-    app.register('config:ember-test-with-data', assign(addonOptions, {
-      attr: this._buildDasherizedAttr(addonOptions.dataTestSuffix)
-    }));
+    if (environment === 'test') {
+      app.register('config:ember-test-with-data', assign(addonOptions, {
+        attr: this._buildDasherizedAttr(addonOptions.dataTestSuffix)
+      }));
+    }
+
     const componentAttrs = this._buildAttrs(addonOptions);
 
     Component.reopen(componentAttrs);
