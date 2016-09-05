@@ -1,0 +1,9 @@
+<h1>Overriding and Adding Custom data-test attributes to Components<p>
+  You can easily override autoTagging or add custom data-test attributes to any
+component by simply adding a tag. The tag is the camelcase of dataTest + your
+suffix (inserted via config/environment file) OR the dasherized version of the
+same thing.
+</p>
+{{input data-test='this-is-an-overridden-input-id' value='overridden'}}
+
+with override: {{textarea dataTest='text-area-1'}}

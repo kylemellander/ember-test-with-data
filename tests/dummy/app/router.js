@@ -9,6 +9,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('link-to');
   this.route('auto-tag');
+  this.route('override');
 });
 
 export default Router;
