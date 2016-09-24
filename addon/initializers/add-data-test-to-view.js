@@ -36,13 +36,16 @@ export default {
   },
 
   autoTagComputed: computed('dataTestSuffix', function() {
-    const suffix = this.get('dataTestSuffix');
+    let suffix = this.get('dataTestSuffix');
+
+    if (typeof suffix === 'number') { suffix = suffix.toString(); }
+
     let baseId = (this._debugContainerKey || '')
       .replace(/.*component:/g, '')
       .replace(/\//g, '-')
       .replace(/^-/, '');
 
-    return typeof suffix === 'undefined' ? baseId : `${baseId}-${suffix}`;
+    return typeof suffix === 'string' ? `${baseId}-${dasherize(suffix)}` : baseId;
   }),
 
   _buildAttrs({ dataTestSuffix, autoTag = true }) {
