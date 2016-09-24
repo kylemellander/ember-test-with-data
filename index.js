@@ -1,20 +1,22 @@
 /* jshint node: true */
 'use strict';
 
+var Funnel = require('broccoli-funnel');
+
 module.exports = {
   name: 'ember-test-with-data',
   included(app) {
     var registry = app.registry;
     var options = app.options || {};
-    var env = app.env;
+    this.env = app.env;
     var configPath = options.configPath;
-    if (!env || !configPath) { return; }
+    if (!this.env || !configPath) { return; }
 
-    var config = require(configPath)(env) || {};
+    var config = require(configPath)(this.env) || {};
     var addonSettings = config['ember-test-with-data'] || {};
-    var hiddenEnvironments = addonSettings['hiddenEnvironments'] || ['production'];
+    this.hiddenEnvironments = addonSettings['hiddenEnvironments'] || ['production'];
 
-    if (hiddenEnvironments.indexOf(env) !== -1) {
+    if (this.hiddenEnvironments.indexOf(this.env) !== -1) {
       var FilterDataTestAttributesTransform = require('./filter-data-test-attributes');
 
       registry.add('htmlbars-ast-plugin', {
@@ -23,5 +25,13 @@ module.exports = {
         baseDir: function() { return app.project.root; }
       });
     }
+  },
+
+  preprocessTree(type, tree) {
+    if (type === 'js' && this.hiddenEnvironments.indexOf(this.env) !== -1) {
+      this.ui.writeLine('Stripping all data test attributes');
+      tree = new Funnel(tree, { exclude: [ /add-data-test-to-view/ ] });
+    }
+    return tree;
   }
 };
