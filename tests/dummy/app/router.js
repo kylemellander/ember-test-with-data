@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('link-to');
   this.route('auto-tag');
   this.route('override');
+  this.route('iterating');
 });
 
 export default Router;

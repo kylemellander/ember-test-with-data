@@ -1,0 +1,9 @@
+<h1>Adding index</h1>
+{{#each model as |cereal index|}}
+  {{cereal}}: {{data-test dataTestSuffix=index}}<br />
+{{/each}}
+
+<h1>Adding dasherized version of value</h1>
+{{#each model as |cereal index|}}
+  {{cereal}}: {{data-test dataTestSuffix=cereal}}<br />
+{{/each}}
