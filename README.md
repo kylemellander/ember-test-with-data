@@ -16,6 +16,22 @@ complexity.
 By creating data-test attributes on elements, we can specifically select DOM
 elements with that attribute being a sole purpose of helping you test.
 
+## What does this do differently than others?
+
+There are 2 data attribute addons out there.
+
+* https://github.com/simplabs/ember-test-selectors
+* https://github.com/Ticketfly/ember-hook
+
+So why use ember-test-with-data?
+
+* **Full automation** - Rather than having to add all your data-test attributes
+manually, this automates the process (while still allowing for overrides) so
+that you can .
+* **No ember-test-with-data code in production** - We strip everything from your
+production environments so there is no logic shipped with your production code.
+
+
 ## Features
 
 * **Strip tags from production** - Removes all `data-test` attributes from your
@@ -93,7 +109,3 @@ it will find the element you are needing to test.
 
 * **Template Helpers** - To help generate data-test attributes based on models
 and other contexts.
-
-## Still needed
-
-* ember-try support
