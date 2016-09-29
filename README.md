@@ -87,7 +87,7 @@ all components and ember template helpers based on their name. (i.e.
 `{{your-component}}` will give the components element a data test attribute of
 `your-component`)
 
-###### Acceptance Test Helper
+## Acceptance Test Helper
 
 To help you simplify your testing, an acceptance test helper is provided.  To
 use it in your acceptance tests, simply add the following line to the top of
