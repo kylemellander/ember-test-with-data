@@ -73,11 +73,9 @@ all components and ember template helpers based on their name. (i.e.
 
 ## Future features
 
-* **Test Helpers** - To help find elements in integration and acceptance tests.
 * **Template Helpers** - To help generate data-test attributes based on models
 and other contexts.
 
 ## Still needed
 
-* Testing!!!
 * ember-try support
