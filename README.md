@@ -71,6 +71,24 @@ all components and ember template helpers based on their name. (i.e.
 `{{your-component}}` will give the components element a data test attribute of
 `your-component`)
 
+###### Acceptance Test Helper
+
+To help you simplify your testing, an acceptance test helper is provided.  To
+use it in your acceptance tests, simply add the following line to the top of
+your `start-app.js` helper.
+
+```js
+// tests/helpers/start-app.js
+
+import Ember from 'ember';
+import './ember-test-with-data/find-with-data';
+
+...
+```
+
+Now in your app you can use `findWithData('VALUE_OF_DATA_TEST_ATTRIBUTE')` and
+it will find the element you are needing to test.
+
 ## Future features
 
 * **Template Helpers** - To help generate data-test attributes based on models
