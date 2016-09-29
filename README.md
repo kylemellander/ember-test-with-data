@@ -1,5 +1,7 @@
 # ember-test-with-data
 
+[![Code Climate](https://codeclimate.com/github/kylemellander/ember-test-with-data/badges/gpa.svg)](https://codeclimate.com/github/kylemellander/ember-test-with-data)
+
 ## Introduction
 
 ember-test-with-data keeps integration and acceptance testing consistent by
