@@ -4,6 +4,8 @@ const {
   assign,
   Component,
   computed,
+  get,
+  set,
   String: {
     camelize,
     dasherize
@@ -53,7 +55,19 @@ export default {
     const dasherizeAttr = this._buildDasherizedAttr(dataTestSuffix);
     const camelizeAttr = camelize(dasherizeAttr);
 
-    attrs.attributeBindings = [`${camelizeAttr}:${dasherizeAttr}`];
+    const attributeBindingsLabel = `${camelizeAttr}:${dasherizeAttr}`;
+    attrs.init = function() {
+      this._super(...arguments);
+      if (this.get('tagName') !== '') {
+        const attributeBindings = get(this, 'attributeBindings');
+        if (attributeBindings) {
+          attributeBindings.push(attributeBindingsLabel);
+        } else {
+          set(this, 'attributeBindings', [attributeBindingsLabel]);
+        }
+      }
+    };
+
     attrs[camelizeAttr] = computed.alias(dasherizeAttr);
     if (autoTag) { attrs[dasherizeAttr] = this.autoTagComputed; }
 
