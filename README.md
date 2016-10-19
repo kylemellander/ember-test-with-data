@@ -29,7 +29,7 @@ So why use ember-test-with-data?
 
 * **Full automation** - Rather than having to add all your data-test attributes
 manually, this automates the process (while still allowing for overrides) so
-that you can .
+that you can focus on your tests.
 * **No ember-test-with-data code in production** - We strip everything from your
 production environments so there is no logic shipped with your production code.
 
