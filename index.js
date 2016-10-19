@@ -27,9 +27,10 @@ module.exports = {
     }
   },
 
-  preprocessTree(type, tree) {
+  treeForAddon() {
+    var tree = this._super.treeForAddon.apply(this, arguments);
     const hiddenEnvironments = this.hiddenEnvironments || ['production'];
-    if (type === 'js' && hiddenEnvironments.indexOf(this.env) !== -1) {
+    if (hiddenEnvironments.indexOf(this.env) !== -1) {
       this.ui.writeLine('Stripping all data test attributes');
       tree = new Funnel(tree, { exclude: [ /add-data-test-to-view/ ] });
     }
