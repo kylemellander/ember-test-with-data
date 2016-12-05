@@ -13,14 +13,13 @@ module.exports = {
 
     var configPath = options.configPath;
 
+    if (!this.env || !configPath) { return; }
 
     // NOTE: For ember-cli >= 2.6.0-beta.3, project.configPath() returns absolute path
     // while older ember-cli versions return path relative to project root
     if (!path.isAbsolute(configPath)) {
       configPath = path.join(app.project.root, configPath);
     }
-
-    if (!this.env || !configPath) { return; }
 
     var config = require(configPath)(this.env) || {};
     var addonSettings = config['ember-test-with-data'] || {};
