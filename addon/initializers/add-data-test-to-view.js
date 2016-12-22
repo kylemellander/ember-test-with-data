@@ -15,8 +15,10 @@ const {
 export default {
   name: 'add-data-test-to-view',
   initialize(app) {
-    const { resolveRegistration = () => ({}) } = app;
-    const ENV = resolveRegistration('config:environment');
+    const isENVRegistered = typeof app.resolveRegistration === 'function';
+    const ENV = isENVRegistered ?
+      app.resolveRegistration('config:environment') :
+      {};
     const {
       environment,
       'ember-test-with-data': addonOptions = {}
