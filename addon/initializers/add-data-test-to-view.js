@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
+// Ember.assign() is not available in EmberJS 2.4.5. Fallback to Object.assign if Ember.assign is missing.
 const assign = Ember.assign || Object.assign;
 
 const {
