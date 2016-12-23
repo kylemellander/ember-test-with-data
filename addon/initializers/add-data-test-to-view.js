@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
+const assign = Ember.assign || Object.assign;
+
 const {
-  assign,
   Component,
   computed,
   get,

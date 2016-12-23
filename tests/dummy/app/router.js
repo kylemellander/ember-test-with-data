@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('auto-tag');
   this.route('override');
   this.route('iterating');
+  this.route('context');
 });
 
 export default Router;
