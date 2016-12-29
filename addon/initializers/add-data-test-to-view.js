@@ -60,16 +60,13 @@ export default {
     const dasherizeAttr = this._buildDasherizedAttr(dataTestSuffix);
     const camelizeAttr = camelize(dasherizeAttr);
 
-    const attributeBindingsLabel = `${camelizeAttr}:${dasherizeAttr}`;
+    const attrBindingsLabels = [`${camelizeAttr}:${dasherizeAttr}`];
     attrs.init = function() {
       this._super(...arguments);
       if (this.get('tagName') !== '') {
-        const attributeBindings = get(this, 'attributeBindings');
-        if (attributeBindings) {
-          attributeBindings.push(attributeBindingsLabel);
-        } else {
-          set(this, 'attributeBindings', [attributeBindingsLabel]);
-        }
+        const oldAttrBindings = get(this, 'attributeBindings') || [];
+        const newAttrBindings = attrBindingsLabels.concat(oldAttrBindings);
+        set(this, 'attributeBindings', newAttrBindings);
       }
     };
 
