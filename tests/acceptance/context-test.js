@@ -17,6 +17,5 @@ test('lists with index suffix', assert => {
     let $nestedPanel = findWithData('panel', $container);
     assert.equal($nestedPanel.length, 1, 'only 1 nested panel is found');
     assert.equal($nestedPanel.text().trim(), 'Nested panel', 'correct panel is found');
-
   });
 });

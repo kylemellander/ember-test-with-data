@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 const { Test: { registerHelper } } = Ember;
 
-export default registerHelper('findWithData', (app, value = '', context=null) => {
+export default registerHelper('findWithData', (app, value = '', context=undefined) => {
   const config = app.resolveRegistration('config:ember-test-with-data') || {};
   const attr = config.attr;
   const selector = value ? `[${attr}=${value}]` : `[${attr}]`;
