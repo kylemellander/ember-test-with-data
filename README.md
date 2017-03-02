@@ -57,8 +57,24 @@ change.
 
 ## Configuration
 
-You can set your preferences for ember-test-with-data in the
-`/config/environment.js` file in your ember-cli app. Example:
+You can set your preferences for hidden environments in ember-test-with-data in
+the `ember-cli-build.js` file in your ember-cli app. Example:
+
+```js
+// ember-cli-build.js
+module.exports = function(defaults) {
+  var app = new EmberApp(defaults, {
+    'ember-test-with-data': {
+      hidden: EmberApp.env() === 'production'
+    }
+  })
+
+  return app.toTree()
+}
+```
+
+Because the other options are run after build, then they are set in the apps
+`config/environment.js` file. Example:
 
 ```js
 // config/environment.js
@@ -70,7 +86,6 @@ module.exports = function(environment) {
   };
 
   ENV['ember-test-with-data'] = {
-    hiddenEnvironments: ['staging', 'production'], // default ['production']
     dataTestSuffix: 'id',                          // default null
     autoTag: true                                  // default true
   }
@@ -79,8 +94,11 @@ module.exports = function(environment) {
 
 ###### Settings
 
-* **hiddenEnvironments** (default: `['production']`) - Sets the environments in
-which data-test attributes will be stripped.
+**ember-cli-build options**
+* **hidden** (default: `env === 'production'`) - Sets whether data-test
+attributes will be stripped.
+
+**config/environment options**
 * **dataTestSuffix** (default: `null`) - Sets the suffix of the data-test
 identifier. A value of null makes the generated test attributes as `data-test`,
 but setting it to `id` makes the generated test attributes `data-test-id`.
