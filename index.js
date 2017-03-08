@@ -29,7 +29,7 @@ module.exports = {
   },
 
   treeForApp: function() {
-    var tree = this._super.treeForAddon.apply(this, arguments);
+    var tree = this._super.treeForApp.apply(this, arguments);
 
     return this._stripDataTestInitializers(tree);
   },
