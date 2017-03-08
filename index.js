@@ -25,11 +25,13 @@ module.exports = {
   treeForAddon: function() {
     var tree = this._super.treeForAddon.apply(this, arguments);
 
-    if (this._stripDataTestAttrs) {
-      this.ui.writeLine('Stripping all data test attributes');
-      tree = new Funnel(tree, { exclude: [ /add-data-test-to-view/ ] });
-    }
-    return tree;
+    return this._stripDataTestInitializers(tree);
+  },
+
+  treeForApp: function() {
+    var tree = this._super.treeForAddon.apply(this, arguments);
+
+    return this._stripDataTestInitializers(tree);
   },
 
   setupPreprocessorRegistry(type, registry) {
@@ -40,5 +42,13 @@ module.exports = {
         { hidden: app.env === 'production' };
       this._stripDataTestAttrs = addonOptions.hidden
     }
+  },
+
+  _stripDataTestInitializers: function(tree) {
+    if (this._stripDataTestAttrs) {
+      this.ui.writeLine('Stripping all data test attributes');
+      tree = new Funnel(tree, { exclude: [ /add-data-test-to-view/ ] });
+    }
+    return tree;
   }
 };
