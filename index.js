@@ -28,8 +28,10 @@ module.exports = {
     return this._stripDataTestInitializers(tree);
   },
 
-  treeForApp: function() {
-    var tree = this._super.treeForApp.apply(this, arguments);
+  treeForApp: function(tree) {
+    if (this._super.treeForApp) {
+      tree = this._super.treeForApp.apply(this, arguments);
+    }
 
     return this._stripDataTestInitializers(tree);
   },
