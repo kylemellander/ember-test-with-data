@@ -49,7 +49,7 @@ export default {
 
     let baseId = (this._debugContainerKey || '')
       .replace(/.*component:/g, '')
-      .replace(/\//g, '-')
+      .replace(/[\/\.]/g, '-')
       .replace(/^-/, '');
 
     return typeof suffix === 'string' ? `${baseId}-${dasherize(suffix)}` : baseId;
