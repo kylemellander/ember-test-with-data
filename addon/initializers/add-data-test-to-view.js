@@ -43,16 +43,19 @@ export default {
   },
 
   autoTagComputed: computed('dataTestSuffix', function() {
-    let suffix = this.get('dataTestSuffix');
+    let suffix = get(this, 'dataTestSuffix');
 
     if (typeof suffix === 'number') { suffix = suffix.toString(); }
 
     let baseId = (this._debugContainerKey || '')
       .replace(/.*component:/g, '')
-      .replace(/[\/\.]/g, '-')
+      .replace(/[/.]/g, '-')
       .replace(/^-/, '');
 
-    return typeof suffix === 'string' ? `${baseId}-${dasherize(suffix)}` : baseId;
+    if (typeof suffix === 'string') {
+      return `${baseId}-${dasherize(suffix)}`;
+    }
+    return baseId;
   }),
 
   _buildAttrs({ dataTestSuffix, autoTag = true }) {
@@ -63,7 +66,7 @@ export default {
     const attrBindingsLabels = [`${camelizeAttr}:${dasherizeAttr}`];
     attrs.init = function() {
       this._super(...arguments);
-      if (this.get('tagName') !== '') {
+      if (get(this, 'tagName') !== '') {
         const oldAttrBindings = get(this, 'attributeBindings') || [];
         const newAttrBindings = attrBindingsLabels.concat(oldAttrBindings);
         set(this, 'attributeBindings', newAttrBindings);
