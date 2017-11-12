@@ -1,24 +1,20 @@
-import Ember from 'ember';
 import Application from '../../app';
 import config from '../../config/environment';
 import './ember-test-with-data/find-with-data';
+import { merge } from '@ember/polyfills';
+import { run } from '@ember/runloop';
 
 export default function startApp(attrs, testWithDataSettings) {
-  let application;
+  let attributes = merge({}, config.APP);
+  attributes = merge(attributes, attrs); // use defaults, but you can override;
 
-  let attributes = Ember.merge({}, config.APP);
-  attributes = Ember.merge(attributes, attrs); // use defaults, but you can override;
-
-  Ember.run(() => {
-    application = Application.create(attributes);
-
-    updateConfig(application, testWithDataSettings);
-
+  return run(() => {
+    let application = Application.create(attributes);
     application.setupForTesting();
     application.injectTestHelpers();
+    updateConfig(application, testWithDataSettings);
+    return application;
   });
-
-  return application;
 }
 
 const updateConfig = (app, settings) => {
