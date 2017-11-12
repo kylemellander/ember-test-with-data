@@ -1,24 +1,24 @@
-/* jshint node: true */
+/* eslint-env node */
 'use strict';
 
-var path = require('path');
 var Funnel = require('broccoli-funnel');
+var VersionChecker = require('ember-cli-version-checker');
 
 module.exports = {
   name: 'ember-test-with-data',
-  included: function(app) {
-    var registry = app.registry;
+  included(app) {
+    this._super.included.apply(this, arguments);
     this.env = app.env;
     if (!this.env) { return; }
 
-    if (this._stripDataTestAttrs) {
-      var FilterDataTestAttributesTransform = require('./filter-data-test-attributes');
+    let filterFilename = this._findFilename()
 
-      registry.add('htmlbars-ast-plugin', {
-        name: 'filter-data-test-attributes',
-        plugin: FilterDataTestAttributesTransform,
-        baseDir: function() { return app.project.root; }
-      });
+    if (this._stripDataTestAttrs && filterFilename) {
+      app.options = app.options || {};
+      app.options.babel = app.options.babel || {};
+      app.options.babel.plugins = app.options.babel.plugins || [];
+      this.ui.writeLine('Stripping all data test attributes');
+      app.options.babel.plugins.push(require(filterFilename));
     }
   },
 
@@ -46,9 +46,20 @@ module.exports = {
     }
   },
 
+  _findFilename() {
+    let checker = new VersionChecker(this.parent).for('ember-cli-babel', 'npm');
+    let basename = './filter-data-test-attributes-babel-'
+
+    if (checker.satisfies('^5.0.0')) {
+      return basename + '5'
+    }
+    if (checker.satisfies('^6.0.0-beta.1')) {
+      return basename + '6'
+    }
+  },
+
   _stripDataTestInitializers: function(tree) {
     if (this._stripDataTestAttrs) {
-      this.ui.writeLine('Stripping all data test attributes');
       tree = new Funnel(tree, { exclude: [ /add-data-test-to-view/ ] });
     }
     return tree;
