@@ -12,6 +12,9 @@ module.exports = {
     'max-len': [2, 80, 2, {
       'ignoreComments': true,
       'ignoreUrls': true
+    }],
+    'ember/named-functions-in-promises': [2, {
+      allowSimpleArrowFunction: true
     }]
   }
 };

@@ -9,13 +9,19 @@ test('lists with index suffix', assert => {
   visit('/context');
 
   andThen(() => {
-    assert.equal(findWithData('panel').length, 2, 'All panel elements are found');
+    assert.equal(
+      findWithData('panel').length, 2,
+      'All panel elements are found'
+    );
 
     let $container = findWithData('container');
     assert.equal($container.length, 1, 'container element is found');
 
     let $nestedPanel = findWithData('panel', $container);
     assert.equal($nestedPanel.length, 1, 'only 1 nested panel is found');
-    assert.equal($nestedPanel.text().trim(), 'Nested panel', 'correct panel is found');
+    assert.equal(
+      $nestedPanel.text().trim(), 'Nested panel',
+      'correct panel is found'
+    );
   });
 });
